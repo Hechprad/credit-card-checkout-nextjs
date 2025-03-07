@@ -20,7 +20,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${lato.variable} antialiased`}>{children}</body>
+      <body className={`${lato.variable} antialiased`}>
+        <div className='absolute inset-0 flex'>
+          <div className='min-w-[325px] h-full bg-green-1'></div>
+          <div className='w-full h-full bg-white-1'></div>
+        </div>
+
+        <main className='relative z-1'>{children}</main>
+      </body>
     </html>
   );
 }

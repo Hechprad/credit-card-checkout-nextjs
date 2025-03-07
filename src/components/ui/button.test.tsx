@@ -17,7 +17,7 @@ describe('Button', () => {
     const icon = screen.getByTestId('chevron-left-icon');
 
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass('text-green-1');
+    expect(button).toHaveClass('text-white-1');
     expect(icon).toBeInTheDocument();
   });
 
