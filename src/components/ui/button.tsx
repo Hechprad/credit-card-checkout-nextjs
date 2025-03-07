@@ -12,7 +12,7 @@ const buttonVariants = cva(
       variant: {
         default:
           'bg-green-2 text-white-1 text-[15px] tracking-[0.8px] leading-[100%] uppercase  hover:bg-green-2/90',
-        link: 'text-green-1 underline-offset-4 text-[13px] hover:underline h-6 px-2 py-0 cursor-pointer',
+        link: 'text-white-1 underline-offset-4 text-[13px] hover:underline h-6 px-2 py-0 cursor-pointer',
       },
       size: {
         default: 'h-[48px] py-[15px] px-[28px] rounded-[4px]',
@@ -40,13 +40,13 @@ function Button({
   return (
     <Comp
       data-slot='button'
-      className={`${cn(buttonVariants({ variant, size: 'default', className }))}`}
+      className={`${cn(buttonVariants({ variant, size: 'default', className: `${className} ${variant === 'link' && 'p-0 h-[16px]'}` }))}`}
       {...props}
     >
       <div className='flex items-center gap-[8px]'>
         {variant === 'link' && (
           <ChevronLeftIcon
-            className='fill-green-1'
+            className='fill-white-1'
             data-testid='chevron-left-icon'
           />
         )}
