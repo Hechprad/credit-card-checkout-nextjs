@@ -1,14 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import Home from './page';
+import Checkout from './page';
 
-describe('Home', () => {
+describe('Checkout', () => {
   it('should render the component', () => {
-    render(<Home />);
+    render(<Checkout />);
 
-    const mainElement = screen.getByRole('main');
-    expect(mainElement).toBeInTheDocument();
-
-    const nextLogo = screen.getByAltText('Next.js logo');
-    expect(nextLogo).toBeInTheDocument();
+    const heading = screen.getByRole('heading', {
+      name: /Adicione um novo cartão de crédito/i,
+    });
+    expect(heading).toBeInTheDocument();
   });
 });
