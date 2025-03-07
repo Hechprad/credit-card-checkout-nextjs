@@ -1,30 +1,21 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 
+import ChevronLeftIcon from '@/assets/icons/chevron-left.svg';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-[8px] whitespace-nowrap rounded-md text-sm font-medium transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
   {
     variants: {
       variant: {
         default:
-          'bg-primary text-primary-foreground shadow-xs hover:bg-primary/90',
-        destructive:
-          'bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40',
-        outline:
-          'border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground',
-        secondary:
-          'bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
+          'bg-green-2 text-white-1 text-[15px] tracking-[0.8px] leading-[100%] uppercase  hover:bg-green-2/90',
+        link: 'text-green-1 underline-offset-4 text-[13px] hover:underline h-6 px-2 py-0 cursor-pointer',
       },
       size: {
-        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
-        sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
-        lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
-        icon: 'size-9',
+        default: 'h-[48px] py-[15px] px-[28px] rounded-[4px]',
       },
     },
     defaultVariants: {
@@ -36,22 +27,32 @@ const buttonVariants = cva(
 
 function Button({
   className,
-  variant,
-  size,
+  variant = 'default',
   asChild = false,
+  children,
   ...props
-}: React.ComponentProps<'button'> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-  }) {
+}: React.ComponentProps<'button'> & {
+  asChild?: boolean;
+  variant?: 'default' | 'link';
+}) {
   const Comp = asChild ? Slot : 'button';
 
   return (
     <Comp
       data-slot='button'
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={`${cn(buttonVariants({ variant, size: 'default', className }))}`}
       {...props}
-    />
+    >
+      <div className='flex items-center gap-[8px]'>
+        {variant === 'link' && (
+          <ChevronLeftIcon
+            className='fill-green-1'
+            data-testid='chevron-left-icon'
+          />
+        )}
+        {children}
+      </div>
+    </Comp>
   );
 }
 
