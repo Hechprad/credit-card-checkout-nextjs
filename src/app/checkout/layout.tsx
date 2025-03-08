@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
+import ChevronLeftIcon from '@/assets/icons/chevron-left.svg';
 import StepTracker from '@/components/StepTracker';
 import { Button } from '@/components/ui/button';
 
@@ -38,14 +39,24 @@ export default function CheckoutLayout({
 
   return (
     <>
-      <header className='flex justify-between gap-[20px] w-full pt-[50px] pl-[5px] pr-[14px]'>
-        <Button asChild variant='link'>
+      <header className='flex items-center w-full pt-[40px] mb:pt-[50px] pl-[5px] pr-[14px] relative'>
+        <Link href={previousStep?.path ?? '/'} className='md:hidden'>
+          <ChevronLeftIcon className='w-[20px] h-[20px] fill-white-1' />
+          {''}
+        </Link>
+        <Button
+          asChild
+          variant='link'
+          className='absolute left-[5px] md:static ml-[10px] md:ml-0 hidden md:flex'
+        >
           <Link href={previousStep?.path ?? '/'}>
             {steps[currentIndex].previousStepButton}
           </Link>
         </Button>
 
-        <StepTracker steps={steps} />
+        <div className='w-full flex justify-center md:justify-end'>
+          <StepTracker steps={steps} />
+        </div>
       </header>
       {children}
     </>

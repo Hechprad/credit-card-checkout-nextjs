@@ -13,7 +13,12 @@ function Input({
   ...props
 }: React.ComponentProps<'input'> & t.InputProps) {
   return (
-    <div className='flex flex-col gap-[6px] justify-start items-end w-full min-h-[44px]'>
+    <div
+      className={cn(
+        `flex flex-col gap-[6px] justify-start items-end w-full ${hideLabel ? 'mt-[20px]' : ''}`,
+        className,
+      )}
+    >
       {hideLabel ? null : (
         <label className='flex w-full h-[14px] gap-[8px] justify-start items-center text-[12px] font-medium text-gray-1 leading-none'>
           {label}
@@ -36,7 +41,6 @@ function Input({
           `,
           'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
           'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
-          className,
         )}
         {...props}
       />
