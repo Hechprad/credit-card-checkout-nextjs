@@ -4,13 +4,11 @@ import creditCardBackgroundActive from '@/assets/backgrounds/credit-card-bg-2.pn
 import * as h from './helper';
 import * as t from './types';
 
-export default function CreditCard({
-  bgActive = false,
-  cardNumber,
-  expirationDate,
-  logo,
-  name,
-}: t.CreditCardProps) {
+export default function CreditCard({ formWatch }: t.CreditCardProps) {
+  const { cardNumber, expiryDate, name } = formWatch();
+  const bgActive = cardNumber.length ?? expiryDate.length ?? name.length;
+  const logo = h.identifyCardBrand(cardNumber);
+
   return (
     <div className='relative w-[492px] h-[317px]'>
       <div
@@ -32,7 +30,7 @@ export default function CreditCard({
                 {name && name.length > 0 ? name : 'NOME DO TITULAR'}
               </p>
               <p className='drop-shadow-default text-[26px]'>
-                {expirationDate ?? '00/00'}
+                {expiryDate ?? '00/00'}
               </p>
             </div>
           </div>
