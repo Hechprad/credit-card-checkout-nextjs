@@ -19,8 +19,14 @@ export default function CreditCardForm({
   control,
   errors,
   handleSubmit,
-  register,
+  watch,
 }: t.CreditCardFormProps) {
+  const { cardNumber, cvv, expiryDate, installments, name } = watch();
+
+  const getMargin = (error: string | undefined) => ({
+    className: `${error ? 'mb-[22px]' : 'mb-[42px]'}`,
+  });
+
   const onSubmit: SubmitHandler<t.creditCardFormFields> = (data) =>
     console.log(data);
   const onSubmitError: SubmitErrorHandler<t.creditCardFormFields> = (data) =>
@@ -29,7 +35,7 @@ export default function CreditCardForm({
   return (
     <form
       id='credit-card-form'
-      className='flex flex-col gap-[42px] justify-start items-end'
+      className='flex flex-col justify-start items-center md:items-end'
       onSubmit={handleSubmit(onSubmit, onSubmitError)}
     >
       <Controller
@@ -44,6 +50,8 @@ export default function CreditCardForm({
             maxLength={19}
             onChange={(e) => field.onChange(h.formatCardNumber(e.target.value))}
             errorMessage={errors.cardNumber?.message}
+            hideLabel={cardNumber.length === 0}
+            {...getMargin(errors.cardNumber?.message)}
           />
         )}
       />
@@ -59,6 +67,8 @@ export default function CreditCardForm({
             maxLength={30}
             onChange={(e) => field.onChange(h.formatName(e.target.value))}
             errorMessage={errors.name?.message}
+            hideLabel={name.length === 0}
+            {...getMargin(errors.name?.message)}
           />
         )}
       />
@@ -78,6 +88,8 @@ export default function CreditCardForm({
                 field.onChange(h.formatExpiryDate(e.target.value))
               }
               errorMessage={errors.expiryDate?.message}
+              hideLabel={expiryDate.length === 0}
+              {...getMargin(errors.expiryDate?.message)}
             />
           )}
         />
@@ -111,19 +123,30 @@ export default function CreditCardForm({
               maxLength={4}
               onChange={(e) => field.onChange(h.formatCVV(e.target.value))}
               errorMessage={errors.cvv?.message}
+              hideLabel={cvv.length === 0}
+              {...getMargin(errors.cvv?.message)}
             />
           )}
         />
       </div>
-      <Select
-        label='Número de parcelas'
-        placeholder='Número de parcelas'
-        options={[...Array(12)].map((_, i) => ({
-          label: `${i + 1} x`,
-          value: `${i + 1}`,
-        }))}
-        {...register('installments')}
-        errorMessage={errors.installments?.message}
+      <Controller
+        name='installments'
+        control={control}
+        render={({ field }) => (
+          <Select
+            label='Número de parcelas'
+            placeholder='Número de parcelas'
+            options={[...Array(12)].map((_, i) => ({
+              label: `${i + 1} x`,
+              value: `${i + 1}`,
+            }))}
+            onValueChange={(value) => field.onChange(value)}
+            {...field}
+            errorMessage={errors.installments?.message}
+            hideLabel={installments.length === 0}
+            {...getMargin(errors.installments?.message)}
+          />
+        )}
       />
 
       <Button type='submit' form='credit-card-form' className='mt-[20px]'>

@@ -3,6 +3,7 @@ import {
   FieldErrors,
   UseFormHandleSubmit,
   UseFormRegister,
+  UseFormWatch,
 } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -15,4 +16,5 @@ export type CreditCardFormProps = {
   errors: FieldErrors<creditCardFormFields>;
   handleSubmit: UseFormHandleSubmit<creditCardFormFields>;
   register: UseFormRegister<creditCardFormFields>;
+  watch: UseFormWatch<creditCardFormFields>;
 };

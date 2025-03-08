@@ -31,26 +31,43 @@ export default function Payment() {
   });
 
   return (
-    <div className='flex h-[100%]'>
-      <aside className='flex flex-col gap-[50px] items-start min-w-[325px] bg-green-1 pt-[50px] pl-[5px]'>
-        <div className='flex gap-[16px] w-full h-[54px]'>
-          <div className='min-w-[54px] border-[2px] border-white-1 rounded-[50%] p-[10px]'>
-            <CreditCardIcon />
+    <div className='flex flex-col items-center md:items-start md:flex-row h-[100%]'>
+      <div
+        className={`
+          flex flex-col gap-[16px] md:gap-[50px] items-center md:items-start
+          min-w-[325px]
+          pt-[30px] md:pt-[50px] md:pl-[5px]`}
+      >
+        <div className='flex justify-center md:justify-start gap-[16px] w-full h-[38px] md:h-[54px]'>
+          <div
+            className={`
+              flex justify-center items-center
+              min-w-[40px] md:min-w-[50px] max-h-[40px] md:min-h-[50px]
+              border-[2px] border-white-1 rounded-[50%]
+              `}
+          >
+            <CreditCardIcon
+              width='24'
+              height='24'
+              viewBox='0 0 30 30'
+              className='md:w-[30px] md:h-[30px]'
+            />
           </div>
-          <h1 className=' text-[20px] text-white-1 w-[202px]'>
+          <h1 className='text-[16px] md:text-[20px] text-white-1 w-[202px]'>
             Adicione um novo cartão de crédito
           </h1>
         </div>
 
         <CreditCard formWatch={watch} />
-      </aside>
+      </div>
 
-      <div className='w-full bg-white-1 pt-[50px] pr-[5px] pb-[66px] pl-[203px]'>
+      <div className='w-full bg-white-1 pt-[30px] md:pt-[50px] pr-[40px] md:pr-[5px] pb-[66px] pl-[40px] md:pl-[203px]'>
         <CreditCardForm
           control={control}
           errors={errors}
           handleSubmit={handleSubmit}
           register={register}
+          watch={watch}
         />
       </div>
     </div>
