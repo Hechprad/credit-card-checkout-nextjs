@@ -18,6 +18,33 @@
     "type": "git",
     "url": "https://github.com/Hechprad/credit-card-checkout-nextjs"
   },
+  "keywords": [
+    "nextjs",
+    "next.js",
+    "nextjs 15",
+    "next.js 15",
+    "frontend",
+    "react",
+    "react 19",
+    "typescript",
+    "shadcn",
+    "react",
+    "next-navigation",
+    "jest",
+    "husky",
+    "eslint",
+    "prettier",
+    "editorconfig",
+    "lint-staged",
+    "credit card",
+    "checkout",
+    "boilerplate",
+    "template",
+    "luhn",
+    "luhn validation",
+    "bank brand flags regex",
+    "identify card brand"
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -78,5 +105,9 @@
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "engines": {
+    "npm": ">=10",
+    "node": ">=22"
   }
 }
