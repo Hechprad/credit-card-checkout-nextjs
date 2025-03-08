@@ -8,9 +8,9 @@ export default function CheckoutNotFound() {
       <h1 className=' text-[20px] text-white-1  mb-[32px]'>
         Página não encontrada
       </h1>
-      <Button>
-        <Link href='/checkout/payment'>Ir para checkout</Link>
-      </Button>
+      <Link href='/checkout/payment'>
+        <Button className='cursor-pointer'>Ir para checkout</Button>
+      </Link>
     </div>
   );
 }
