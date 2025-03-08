@@ -1,8 +1,35 @@
+'use client';
+
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
 import CreditCardIcon from '@/assets/icons/credit-card.svg';
 import CreditCard from '@/components/CreditCard';
 import CreditCardForm from '@/components/CreditCardForm';
+import { creditCardSchema } from '@/components/CreditCardForm/helpers';
+
+import type { creditCardFormFields } from '@/components/CreditCardForm/types';
 
 export default function Payment() {
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    register,
+    // watch,
+  } = useForm<creditCardFormFields>({
+    resolver: zodResolver(creditCardSchema),
+    defaultValues: {
+      cardNumber: '',
+      cvv: '',
+      expiryDate: '',
+      installments: '',
+      name: '',
+    },
+    mode: 'onBlur',
+    criteriaMode: 'all',
+  });
+
   return (
     <div className='flex h-[100%]'>
       <aside className='flex flex-col gap-[50px] items-start min-w-[325px] bg-green-1 pt-[50px] pl-[5px]'>
@@ -25,7 +52,12 @@ export default function Payment() {
       </aside>
 
       <div className='w-full bg-white-1 pt-[50px] pr-[5px] pb-[66px] pl-[203px]'>
-        <CreditCardForm />
+        <CreditCardForm
+          control={control}
+          errors={errors}
+          handleSubmit={handleSubmit}
+          register={register}
+        />
       </div>
     </div>
   );
