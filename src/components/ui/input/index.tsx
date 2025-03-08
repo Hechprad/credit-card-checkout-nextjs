@@ -6,13 +6,14 @@ import * as t from './types';
 
 function Input({
   className,
+  errorMessage,
   label,
   type,
   hideLabel = false,
   ...props
 }: React.ComponentProps<'input'> & t.InputProps) {
   return (
-    <div className='flex flex-col gap-[6px] justify-end items-end w-full h-[44px]'>
+    <div className='flex flex-col gap-[6px] justify-start items-end w-full min-h-[44px]'>
       {hideLabel ? null : (
         <label className='flex w-full h-[14px] gap-[8px] justify-start items-center text-[12px] font-medium text-gray-1 leading-none'>
           {label}
@@ -23,7 +24,7 @@ function Input({
         data-slot='input'
         className={cn(
           `
-          border-b border-gray-1
+          border-b border-gray-1 ${errorMessage ? 'border-red-1 border-b-[2px]' : ''}
           placeholder:text-gray-1 placeholder:font-[400]
           text-[16px] text-black-1
           file:text-foreground 
@@ -39,6 +40,9 @@ function Input({
         )}
         {...props}
       />
+      {errorMessage && (
+        <p className='w-full text-[12px] text-red-1'>{errorMessage}</p>
+      )}
     </div>
   );
 }

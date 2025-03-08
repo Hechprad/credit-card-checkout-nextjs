@@ -59,15 +59,17 @@ function SelectValue({
 function SelectTrigger({
   className,
   children,
+  errorMessage,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Trigger> & { label?: string }) {
+}: React.ComponentProps<typeof SelectPrimitive.Trigger> &
+  Pick<t.SelectProps, 'errorMessage'>) {
   return (
     <div className='relative'>
       <SelectPrimitive.Trigger
         data-slot='select-trigger'
         className={cn(
           `
-          border-b border-gray-1
+          border-b border-gray-1 ${errorMessage ? 'border-red-1 border-b-[2px]' : ''}
           [&_[data-placeholder]]:text-gray-1 data-[placeholder]:text-gray-1 data-[placeholder]:font-[400] 
           text-[16px] text-black-1 whitespace-nowrap 
           [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:ring-ring/50 
@@ -198,6 +200,7 @@ function SelectScrollDownButton({
 }
 
 function Select({
+  errorMessage,
   label,
   placeholder,
   options,
@@ -205,21 +208,26 @@ function Select({
   ...rest
 }: React.ComponentProps<typeof SelectPrimitive.Root> & t.SelectProps) {
   return (
-    <SelectSCN {...rest}>
-      <SelectGroup>
-        {hideLabel ? null : <SelectLabel>{label}</SelectLabel>}
-        <SelectTrigger>
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-      </SelectGroup>
-      <SelectContent>
-        {options.map((option) => (
-          <SelectItem key={option.value} value={option.value}>
-            {option.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </SelectSCN>
+    <div className='w-full flex flex-col'>
+      <SelectSCN {...rest}>
+        <SelectGroup>
+          {hideLabel ? null : <SelectLabel>{label}</SelectLabel>}
+          <SelectTrigger errorMessage={errorMessage}>
+            <SelectValue placeholder={placeholder} />
+          </SelectTrigger>
+        </SelectGroup>
+        <SelectContent>
+          {options.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </SelectSCN>
+      {errorMessage && (
+        <p className='w-full text-[12px] text-red-1 mt-[5px]'>{errorMessage}</p>
+      )}
+    </div>
   );
 }
 
