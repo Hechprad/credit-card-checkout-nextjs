@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { CheckIcon } from 'lucide-react';
 
@@ -38,7 +39,7 @@ export default function StepTracker({ steps }: t.StepTrackerProps) {
               )}
               <div
                 key={step.label}
-                className={cn(`border-green-1 border-[1.5px] rounded-[50%] w-[20px] 
+                className={cn(`border-green-1 border-[1.5px] rounded-[50%] w-[20px]
             h-[20px] bg-white-1 flex justify-center items-center ${alreadyDone ? 'bg-green-1' : ''}`)}
               >
                 {alreadyDone ? (
@@ -47,7 +48,9 @@ export default function StepTracker({ steps }: t.StepTrackerProps) {
                   <span className='text-[13px] text-green-1'>{index + 1}</span>
                 )}
               </div>
-              <p className='text-[12px] text-green-1'>{step.label}</p>
+              <Link href={step.path}>
+                <p className='text-[12px] text-green-1'>{step.label}</p>
+              </Link>
             </div>
           );
         })}

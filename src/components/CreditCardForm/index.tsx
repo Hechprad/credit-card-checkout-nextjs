@@ -15,7 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { submitPayment } from '@/api';
+import { submitPayment } from '@/services';
 
 import * as h from './helpers';
 import * as t from './types';
