@@ -1,5 +1,11 @@
-import { Controller, SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
+'use client';
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Controller, SubmitErrorHandler } from 'react-hook-form';
+import { toast } from 'sonner';
+
+import InfoIcon from '@/assets/icons/information.svg';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
@@ -9,8 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-
-import InfoIcon from '@/assets/icons/information.svg';
+import { submitPayment } from '@/pages/api/pagar';
 
 import * as h from './helpers';
 import * as t from './types';
@@ -21,16 +26,44 @@ export default function CreditCardForm({
   handleSubmit,
   watch,
 }: t.CreditCardFormProps) {
+  const router = useRouter();
   const { cardNumber, cvv, expiryDate, installments, name } = watch();
+
+  const [isPending, setIsPending] = useState(false);
 
   const getMargin = (error: string | undefined) => ({
     className: `${error ? 'mb-[22px]' : 'mb-[42px]'}`,
   });
 
-  const onSubmit: SubmitHandler<t.creditCardFormFields> = (data) =>
-    console.log(data);
-  const onSubmitError: SubmitErrorHandler<t.creditCardFormFields> = (data) =>
-    console.log(data);
+  const onSubmit = async (fields: t.CreditCardFormFields) => {
+    try {
+      setIsPending(true);
+      const response = await submitPayment(fields);
+      console.log('response: ', response);
+
+      toast.success('Pagamento realizado com sucesso!', {
+        description: 'Seu pedido foi realizado com sucesso.',
+        position: 'top-center',
+      });
+
+      router.push('/checkout/confirmation');
+    } catch (error: unknown) {
+      console.error('error: ', error);
+
+      toast.error('Erro ao processar pagamento. Tente novamente.', {
+        description: 'Falha interna do servidor.',
+        position: 'top-center',
+      });
+    } finally {
+      setIsPending(false);
+    }
+  };
+
+  const onSubmitError: SubmitErrorHandler<t.CreditCardFormFields> = () =>
+    toast.error('Campos com valores inválidos.', {
+      description: 'Verifique os campos e tente novamente.',
+      position: 'top-center',
+    });
 
   return (
     <form
@@ -52,6 +85,7 @@ export default function CreditCardForm({
             errorMessage={errors.cardNumber?.message}
             hideLabel={cardNumber.length === 0}
             {...getMargin(errors.cardNumber?.message)}
+            disabled={isPending}
           />
         )}
       />
@@ -69,6 +103,7 @@ export default function CreditCardForm({
             errorMessage={errors.name?.message}
             hideLabel={name.length === 0}
             {...getMargin(errors.name?.message)}
+            disabled={isPending}
           />
         )}
       />
@@ -90,6 +125,7 @@ export default function CreditCardForm({
               errorMessage={errors.expiryDate?.message}
               hideLabel={expiryDate.length === 0}
               {...getMargin(errors.expiryDate?.message)}
+              disabled={isPending}
             />
           )}
         />
@@ -125,6 +161,7 @@ export default function CreditCardForm({
               errorMessage={errors.cvv?.message}
               hideLabel={cvv.length === 0}
               {...getMargin(errors.cvv?.message)}
+              disabled={isPending}
             />
           )}
         />
@@ -145,11 +182,17 @@ export default function CreditCardForm({
             errorMessage={errors.installments?.message}
             hideLabel={installments.length === 0}
             {...getMargin(errors.installments?.message)}
+            disabled={isPending}
           />
         )}
       />
 
-      <Button type='submit' form='credit-card-form' className='mt-[20px]'>
+      <Button
+        type='submit'
+        form='credit-card-form'
+        className='mt-[45px] md:mt-[62px]'
+        disabled={isPending}
+      >
         Continuar
       </Button>
     </form>

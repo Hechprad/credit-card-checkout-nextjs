@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Lato } from 'next/font/google';
+import { Toaster } from 'sonner';
 import '@/styles/globals.css';
 
 const lato = Lato({
@@ -27,6 +28,7 @@ export default function RootLayout({
         </div>
 
         <main className='relative z-1'>{children}</main>
+        <Toaster />
       </body>
     </html>
   );
