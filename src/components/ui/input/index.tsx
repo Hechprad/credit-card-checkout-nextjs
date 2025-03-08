@@ -8,13 +8,16 @@ function Input({
   className,
   label,
   type,
+  hideLabel = false,
   ...props
 }: React.ComponentProps<'input'> & t.InputProps) {
   return (
-    <div className='flex flex-col gap-[8px] w-full'>
-      <label className='flex w-full gap-[8px] justify-start items-center text-[12px] font-medium text-gray-1 leading-none mb-2'>
-        {label}
-      </label>
+    <div className='flex flex-col gap-[6px] justify-end items-end w-full h-[44px]'>
+      {hideLabel ? null : (
+        <label className='flex w-full h-[14px] gap-[8px] justify-start items-center text-[12px] font-medium text-gray-1 leading-none'>
+          {label}
+        </label>
+      )}
       <input
         type={type}
         data-slot='input'
