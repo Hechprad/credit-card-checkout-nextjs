@@ -11,7 +11,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-green-2 text-white-1 text-[15px] tracking-[0.8px] leading-[100%] uppercase  hover:bg-green-2/90',
+          'w-fit bg-green-2 text-white-1 text-[15px] tracking-[0.8px] leading-[100%] uppercase hover:bg-green-2/90',
         link: 'text-white-1 underline-offset-4 text-[13px] hover:underline h-6 px-2 py-0 cursor-pointer',
       },
       size: {
