@@ -22,7 +22,10 @@ function SelectGroup({
   return (
     <SelectPrimitive.Group
       data-slot='select-group'
-      className={cn('w-full', className)}
+      className={cn(
+        'flex flex-col w-full h-[44px] justify-end items-end [&>*]:w-full',
+        className,
+      )}
       {...props}
     />
   );
@@ -64,7 +67,7 @@ function SelectTrigger({
         data-slot='select-trigger'
         className={cn(
           `
-          border-b border-gray-1 
+          border-b border-gray-1
           [&_[data-placeholder]]:text-gray-1 data-[placeholder]:text-gray-1 data-[placeholder]:font-[400] 
           text-[16px] text-black-1 whitespace-nowrap 
           [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:ring-ring/50 
@@ -104,7 +107,7 @@ function SelectContent({
           data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 
           data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 
           data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-[200px] min-w-[8rem] 
-          overflow-hidden border shadow-md -translate-x-3`,
+          overflow-hidden border shadow-md`,
           position === 'popper' &&
             'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
           className,
@@ -195,16 +198,16 @@ function SelectScrollDownButton({
 }
 
 function Select({
-  hideLabel = false,
   label,
   placeholder,
   options,
+  hideLabel = false,
   ...rest
 }: React.ComponentProps<typeof SelectPrimitive.Root> & t.SelectProps) {
   return (
     <SelectSCN {...rest}>
       <SelectGroup>
-        {!hideLabel ? <SelectLabel>{label}</SelectLabel> : null}
+        {hideLabel ? null : <SelectLabel>{label}</SelectLabel>}
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
