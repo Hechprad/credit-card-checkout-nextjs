@@ -24,7 +24,10 @@ export const creditCardSchema = z.object({
     .pipe(
       z
         .string()
-        .regex(/^\d{16}$/, 'O número do cartão deve ter 16 dígitos')
+        .regex(
+          /^\d{13,16}$/,
+          'O número do cartão deve ter entre 13 e 16 dígitos',
+        )
         .refine((value) => luhnCheck(value), 'Número de cartão inválido'),
     ),
   name: z

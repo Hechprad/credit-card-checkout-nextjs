@@ -16,7 +16,7 @@ export default function Payment() {
     formState: { errors },
     handleSubmit,
     register,
-    // watch,
+    watch,
   } = useForm<creditCardFormFields>({
     resolver: zodResolver(creditCardSchema),
     defaultValues: {
@@ -42,13 +42,7 @@ export default function Payment() {
           </h1>
         </div>
 
-        <CreditCard
-          bgActive
-          cardNumber='1234 567'
-          expirationDate='12/37'
-          logo='visa'
-          name='João da Silva'
-        />
+        <CreditCard formWatch={watch} />
       </aside>
 
       <div className='w-full bg-white-1 pt-[50px] pr-[5px] pb-[66px] pl-[203px]'>
