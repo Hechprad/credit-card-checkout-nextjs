@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import Checkout from './page';
+import Home from './page';
 
-describe('Checkout', () => {
+describe('Home', () => {
   it('should render the component', () => {
-    render(<Checkout />);
+    render(<Home />);
 
     const heading = screen.getByRole('heading', {
-      name: /Adicione um novo cartão de crédito/i,
+      name: /Home/i,
     });
     expect(heading).toBeInTheDocument();
   });
