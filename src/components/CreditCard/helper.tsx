@@ -10,7 +10,7 @@ import VisaLogo from '@/assets/credit-card-logos/visa.svg';
 import type { CreditCardLogos } from '@/components/CreditCard/types';
 
 export const getLogo = (): Record<CreditCardLogos, JSX.Element> => {
-  const className = 'h-[74px] fill-white-1';
+  const className = 'h-[42px] md:h-[74px] fill-white-1';
 
   return {
     'american-express': <AmericanExpressLogo className={className} />,

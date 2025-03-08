@@ -34,8 +34,8 @@ export const creditCardSchema = z.object({
     .string()
     .min(2, 'O nome deve ter pelo menos 2 caracteres.')
     .max(30, 'O nome deve ter no máximo 30 caracteres.')
-    .regex(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/, '* O nome deve conter apenas letras'),
-  cvv: z.string().regex(/^\d{3,4}$/, '* CVV deve ter 3 ou 4 dígitos'),
+    .regex(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/, 'O nome deve conter apenas letras'),
+  cvv: z.string().regex(/^\d{3,4}$/, 'CVV deve ter 3 ou 4 dígitos'),
   expiryDate: z
     .string()
     .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Data inválida')
