@@ -8,7 +8,7 @@ import CreditCard from '@/components/CreditCard';
 import CreditCardForm from '@/components/CreditCardForm';
 import { creditCardSchema } from '@/components/CreditCardForm/helpers';
 
-import type { creditCardFormFields } from '@/components/CreditCardForm/types';
+import type { CreditCardFormFields } from '@/components/CreditCardForm/types';
 
 export default function Payment() {
   const {
@@ -17,7 +17,7 @@ export default function Payment() {
     handleSubmit,
     register,
     watch,
-  } = useForm<creditCardFormFields>({
+  } = useForm<CreditCardFormFields>({
     resolver: zodResolver(creditCardSchema),
     defaultValues: {
       cardNumber: '',
@@ -34,7 +34,7 @@ export default function Payment() {
     <div className='flex flex-col items-center md:items-start md:flex-row h-[100%]'>
       <div
         className={`
-          flex flex-col gap-[16px] md:gap-[50px] items-center md:items-start
+          flex flex-col gap-[16px] md:gap-[30px] items-center md:items-start
           min-w-[325px]
           pt-[30px] md:pt-[50px] md:pl-[5px]`}
       >
