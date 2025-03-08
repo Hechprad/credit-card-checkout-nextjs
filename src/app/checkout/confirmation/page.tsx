@@ -8,9 +8,9 @@ export default function Confirmation() {
       <h1 className=' text-[20px] text-white-1  mb-[32px]'>
         Confirmação de compra
       </h1>
-      <Button>
-        <Link href='/checkout/payment'>Ir para Checkout</Link>
-      </Button>
+      <Link href='/checkout/payment'>
+        <Button className='cursor-pointer'>Ir para Checkout</Button>
+      </Link>
     </div>
   );
 }
