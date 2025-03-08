@@ -1,6 +1,6 @@
 import { UseFormWatch } from 'react-hook-form';
 
-import type { creditCardFormFields } from '@/components/CreditCardForm/types';
+import type { CreditCardFormFields } from '@/components/CreditCardForm/types';
 
 export type CreditCardLogos =
   | 'american-express'
@@ -21,5 +21,5 @@ export type CreditCardLogos =
   | 'visa';
 
 export type CreditCardProps = {
-  formWatch: UseFormWatch<creditCardFormFields>;
+  formWatch: UseFormWatch<CreditCardFormFields>;
 };
