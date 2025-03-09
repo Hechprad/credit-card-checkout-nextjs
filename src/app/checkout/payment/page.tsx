@@ -15,7 +15,6 @@ export default function Payment() {
     control,
     formState: { errors },
     handleSubmit,
-    register,
     watch,
   } = useForm<CreditCardFormFields>({
     resolver: zodResolver(creditCardSchema),
@@ -66,7 +65,6 @@ export default function Payment() {
           control={control}
           errors={errors}
           handleSubmit={handleSubmit}
-          register={register}
           watch={watch}
         />
       </div>
