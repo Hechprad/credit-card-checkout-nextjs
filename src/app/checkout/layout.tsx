@@ -13,7 +13,7 @@ const steps: StepTrackerItem[] = [
   {
     label: 'Carrinho',
     path: '/checkout/cart',
-    previousStepButton: 'Voltar para o carrinho',
+    previousStepButton: 'Voltar para a home',
   },
   {
     label: 'Pagamento',
